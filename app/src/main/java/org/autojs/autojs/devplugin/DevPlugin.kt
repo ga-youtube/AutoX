@@ -2,7 +2,9 @@ package org.autojs.autojs.devplugin
 
 import android.os.Build
 import android.util.Log
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
@@ -50,7 +52,9 @@ object DevPlugin {
         }
     }
 
-    private val gson get() = Gson()
+    private val gson get() = GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create();
     const val SERVER_PORT = 9317
     private const val CLIENT_VERSION = 2
     private const val TAG = "DevPlugin"
