@@ -164,7 +164,6 @@ public class TimedTaskSettingActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         long taskId = getIntent().getLongExtra(EXTRA_TASK_ID, -1);
         if (taskId != -1) {
             mTimedTask = TimedTaskManager.INSTANCE.getTimedTask(taskId);
@@ -182,7 +181,7 @@ public class TimedTaskSettingActivity extends BaseActivity {
                 mScriptFile = new ScriptFile(path);
             }
         }
-
+        super.onCreate(savedInstanceState);
     }
 
     @AfterViews
