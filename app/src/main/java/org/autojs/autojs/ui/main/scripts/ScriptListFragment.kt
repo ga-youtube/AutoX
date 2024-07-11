@@ -1,14 +1,20 @@
 package org.autojs.autojs.ui.main.scripts
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
@@ -66,7 +72,7 @@ class ScriptListFragment : Fragment() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     floatingActionButton = {
-//                        FloatingButton()
+                        //                        FloatingButton()
                     },
                 ) {
                     AndroidView(
@@ -107,19 +113,19 @@ class ScriptListFragment : Fragment() {
                 )
             },
         ) {
-            this.items(context)
+            this.items(requireContext())
         }
     }
 
     private fun SpeedDialScope.items(context: Context) {
         item {
-            NewDirectory(context)
+            NewDirectory()
         }
         item {
-            NewFile(context)
+            NewFile()
         }
         item {
-            ImportFile(context)
+            ImportFile()
         }
         item {
             NewProject(context)
@@ -153,17 +159,26 @@ class ScriptListFragment : Fragment() {
         ExperimentalPermissionsApi::class
     )
     @Composable
-    private fun ImportFile(context: Context) {
+    private fun ImportFile() {
         val permission = rememberExternalStoragePermissionsState {
             if (it) getScriptOperations(
-                context,
                 this@ScriptListFragment
             ).importFile()
-            else showExternalStoragePermissionToast(context)
+            else showExternalStoragePermissionToast(requireContext())
         }
         FabWithLabel(
             onClick = {
-                permission.launchMultiplePermissionRequest()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (Environment.isExternalStorageManager()) {
+                        getScriptOperations(
+                            this@ScriptListFragment
+                        ).importFile()
+                    } else {
+                        showExternalStoragePermissionToast(requireContext())
+                    }
+                } else {
+                    permission.launchMultiplePermissionRequest()
+                }
             },
             labelContent = { Text(text = stringResource(id = R.string.text_import)) },
         ) {
@@ -179,17 +194,26 @@ class ScriptListFragment : Fragment() {
         ExperimentalPermissionsApi::class
     )
     @Composable
-    private fun NewFile(context: Context) {
+    private fun NewFile() {
         val permission = rememberExternalStoragePermissionsState {
             if (it) getScriptOperations(
-                context,
                 this@ScriptListFragment
             ).newFile()
-            else showExternalStoragePermissionToast(context)
+            else showExternalStoragePermissionToast(requireContext())
         }
         FabWithLabel(
             onClick = {
-                permission.launchMultiplePermissionRequest()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (Environment.isExternalStorageManager()) {
+                        getScriptOperations(
+                            this@ScriptListFragment
+                        ).newFile()
+                    } else {
+                        showExternalStoragePermissionToast(requireContext())
+                    }
+                } else {
+                    permission.launchMultiplePermissionRequest()
+                }
             },
             labelContent = { Text(text = stringResource(id = R.string.text_file)) },
         ) {
@@ -202,17 +226,26 @@ class ScriptListFragment : Fragment() {
 
     @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterialApi::class)
     @Composable
-    private fun NewDirectory(context: Context) {
+    private fun NewDirectory() {
         val permission = rememberExternalStoragePermissionsState {
             if (it) getScriptOperations(
-                context,
                 this@ScriptListFragment
             ).newDirectory()
-            else showExternalStoragePermissionToast(context)
+            else showExternalStoragePermissionToast(requireContext())
         }
         FabWithLabel(
             onClick = {
-                permission.launchMultiplePermissionRequest()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (Environment.isExternalStorageManager()) {
+                        getScriptOperations(
+                            this@ScriptListFragment
+                        ).newDirectory()
+                    } else {
+                        showExternalStoragePermissionToast(requireContext())
+                    }
+                } else {
+                    permission.launchMultiplePermissionRequest()
+                }
             },
             labelContent = { Text(text = stringResource(id = R.string.text_directory)) },
         ) {
@@ -255,12 +288,11 @@ class ScriptListFragment : Fragment() {
     }
 
     private fun getScriptOperations(
-        context: Context,
         scriptListFragment: ScriptListFragment
     ): ScriptOperations {
         val explorerView = scriptListFragment.explorerView
         return ScriptOperations(
-            context,
+            requireContext(),
             explorerView,
             explorerView.currentPage
         )
