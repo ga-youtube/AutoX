@@ -63,6 +63,8 @@ import org.autojs.autojs.ui.settings.SettingsActivity
 import org.autojs.autoxjs.R
 import org.joda.time.DateTimeZone
 import org.joda.time.Instant
+import org.autojs.autoxjs.BuildConfig
+import androidx.compose.ui.text.style.TextAlign
 
 private const val TAG = "DrawerPage"
 private const val URL_DEV_PLUGIN = "https://github.com/kkevsekk1/Auto.js-VSCode-Extension"
@@ -88,19 +90,19 @@ fun DrawerPage() {
                 .verticalScroll(rememberScrollState())
                 .padding(8.dp)
         ) {
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Image(
-                    painter = rememberAsyncImagePainter(R.drawable.autojs_logo1),
-                    contentDescription = null,
-                    modifier = Modifier.size(120.dp),
-                )
-            }
+            Text(
+                text = "AutoX " + BuildConfig.VERSION_NAME,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
             Text(text = stringResource(id = R.string.text_service))
             AccessibilityServiceSwitch()
             StableModeSwitch()
             NotificationUsageRightSwitch()
             ForegroundServiceSwitch()
             UsageStatsPermissionSwitch()
+            ConnectComputerSwitch()
+            USBDebugSwitch()
 
             Text(text = stringResource(id = R.string.text_script_record))
             FloatingWindowSwitch()
@@ -108,14 +110,11 @@ fun DrawerPage() {
             AutoBackupSwitch()
 
             Text(text = stringResource(id = R.string.text_others))
-            ConnectComputerSwitch()
-            USBDebugSwitch()
-
             SwitchTimedTaskScheduler()
-            ProjectAddress(context)
-            DownloadLink(context)
-            Feedback(context)
-            CheckForUpdate()
+            //            ProjectAddress(context)
+            //            DownloadLink(context)
+            //            Feedback(context)
+            //            CheckForUpdate()
             AppDetailsSettings(context)
         }
         Spacer(

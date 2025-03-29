@@ -115,7 +115,7 @@ class BuildViewModel(private val app: Application, private var source: String) :
     var isStableMode by mutableStateOf(false)
     var isHideLogs by mutableStateOf(false)
     var isVolumeUpControl by mutableStateOf(false)
-    var displaySplash by mutableStateOf(true)//todo
+    var displaySplash by mutableStateOf(false)//todo
     var isHideAccessibilityServices by mutableStateOf(false)
 
     //--特殊权限
