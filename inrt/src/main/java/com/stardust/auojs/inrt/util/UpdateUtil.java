@@ -38,7 +38,7 @@ public class UpdateUtil {
     private static final int START_DOWNLOAD_APK = 2;
     private static final int DOWNLOAD = 3;
     private static final int DOWNLOAD_FINISH = 4;
-    private static final String CHECK_UPDATE_URL = "http://120.25.164.233:8080/appstore/app/checkversion?id=22";
+//    private static final String CHECK_UPDATE_URL = "http://120.25.164.233:8080/appstore/app/checkversion?id=22";
     private Context mContext;
     private ProgressBar mProgress;
     private Dialog mDownloadDialog;
@@ -62,30 +62,30 @@ public class UpdateUtil {
      * 检测软件更新
      */
     public void checkUpdate() {
-        new Thread() {
-            @Override
-            public void run() {
-                String result = HttpUtil.doPost(CHECK_UPDATE_URL);
-                try {
-                    JSONObject dataJson = new JSONObject(result);
-                    versionCode = dataJson.getInt("versionCode");
-                    description = (String) dataJson.get("description");
-                    apkurl = (String) dataJson.get("apkurl");
-                    version = (String) dataJson.get("version");
-                    apkname = (String) dataJson.get("apkname");
-
-                    if (isUpdate(versionCode)) {
-                        // 显示提示对话框
-                        Message msg = new Message();
-                        msg.what = SHOW_NOTICE_DIALOG;
-                        handler.sendMessage(msg);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }.start();
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                String result = HttpUtil.doPost(CHECK_UPDATE_URL);
+//                try {
+//                    JSONObject dataJson = new JSONObject(result);
+//                    versionCode = dataJson.getInt("versionCode");
+//                    description = (String) dataJson.get("description");
+//                    apkurl = (String) dataJson.get("apkurl");
+//                    version = (String) dataJson.get("version");
+//                    apkname = (String) dataJson.get("apkname");
+//
+//                    if (isUpdate(versionCode)) {
+//                        // 显示提示对话框
+//                        Message msg = new Message();
+//                        msg.what = SHOW_NOTICE_DIALOG;
+//                        handler.sendMessage(msg);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }.start();
     }
 
     /**

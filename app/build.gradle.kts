@@ -13,14 +13,6 @@ plugins {
 
 //val SupportLibVersion = "28.0.0"
 
-val propFile: File = File("E:/资料/jks/autojs-app/sign.properties");
-val properties = Properties()
-if (propFile.exists()) {
-    propFile.inputStream().reader().use {
-        properties.load(it)
-    }
-}
-
 //configurations.all {
 //    resolutionStrategy {
 //        force("com.android.support:appcompat-v7:${SupportLibVersion}")
@@ -62,16 +54,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = compose_version
     }
-    signingConfigs {
-        if (propFile.exists()) {
-            getByName("release") {
-                storeFile = file(properties.getProperty("storeFile"))
-                storePassword = properties.getProperty("storePassword")
-                keyAlias = properties.getProperty("keyAlias")
-                keyPassword = properties.getProperty("keyPassword")
-            }
-        }
-    }
     splits {
 
         // Configures multiple APKs based on ABI.
@@ -103,9 +85,6 @@ android {
                     "proguard-rules.pro"
                 )
             )
-            if (propFile.exists()) {
-                signingConfig = signingConfigs.getByName("release")
-            }
         }
         named("release") {
             isShrinkResources = false
@@ -116,9 +95,6 @@ android {
                     "proguard-rules.pro"
                 )
             )
-            if (propFile.exists()) {
-                signingConfig = signingConfigs.getByName("release")
-            }
         }
     }
 
@@ -332,38 +308,38 @@ tasks.named("clean").configure {
         delete(File(assetsDir, "template.apk"))
     }
 }
-//离线文档下载安装
-val docsDir = File(projectDir, "src/main/assets/docs")
-tasks.named("preBuild").dependsOn("installationDocumentation")
-tasks.register("installationDocumentation") {
-    val docV1Uri = "https://codeload.github.com/kkevsekk1/kkevsekk1.github.io/zip/refs/heads/main"
-    val docV1Dir = File(docsDir, "v1")
-    doFirst {
-        if (File(docV1Dir, "index.html").isFile) {
-            return@doFirst
-        }
-        okhttp3.OkHttpClient().newCall(Request.Builder().url(docV1Uri).build()).execute()
-            .use { response ->
-                check(response.isSuccessful) { "installationDocumentation failed" }
-                val body = response.body!!
-                ZipInputStream(body.byteStream()).use { zip ->
-                    var zipEntry: ZipEntry?;
-                    while (true) {
-                        zipEntry = zip.nextEntry ?: break
-                        val file = File(docV1Dir, zipEntry.name.replaceFirst(Regex(".+?/"), ""))
-                        if (zipEntry.isDirectory) {
-                            file.mkdirs()
-                        } else {
-                            file.outputStream().use {
-                                zip.copyTo(it)
-                            }
-                        }
-                        zip.closeEntry()
-                    }
-                }
-            }
-    }
-}
-tasks.named("clean").configure {
-    doFirst { delete(docsDir) }
-}
+////离线文档下载安装
+//val docsDir = File(projectDir, "src/main/assets/docs")
+//tasks.named("preBuild").dependsOn("installationDocumentation")
+//tasks.register("installationDocumentation") {
+//    val docV1Uri = "https://codeload.github.com/kkevsekk1/kkevsekk1.github.io/zip/refs/heads/main"
+//    val docV1Dir = File(docsDir, "v1")
+//    doFirst {
+//        if (File(docV1Dir, "index.html").isFile) {
+//            return@doFirst
+//        }
+//        okhttp3.OkHttpClient().newCall(Request.Builder().url(docV1Uri).build()).execute()
+//            .use { response ->
+//                check(response.isSuccessful) { "installationDocumentation failed" }
+//                val body = response.body!!
+//                ZipInputStream(body.byteStream()).use { zip ->
+//                    var zipEntry: ZipEntry?;
+//                    while (true) {
+//                        zipEntry = zip.nextEntry ?: break
+//                        val file = File(docV1Dir, zipEntry.name.replaceFirst(Regex(".+?/"), ""))
+//                        if (zipEntry.isDirectory) {
+//                            file.mkdirs()
+//                        } else {
+//                            file.outputStream().use {
+//                                zip.copyTo(it)
+//                            }
+//                        }
+//                        zip.closeEntry()
+//                    }
+//                }
+//            }
+//    }
+//}
+//tasks.named("clean").configure {
+//    doFirst { delete(docsDir) }
+//}

@@ -1,17 +1,8 @@
-import java.util.Properties
 import kotlin.collections.*
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
-}
-
-val propFile: File = File("E:/资料/jks/autojs-inrt/sign.properties");
-val properties = Properties()
-if (propFile.exists()) {
-    propFile.reader().use {
-        properties.load(it)
-    }
 }
 
 android {
@@ -39,16 +30,6 @@ android {
         add("ExtraTranslation")
     }
 
-    signingConfigs {
-        if (propFile.exists()) {
-            getByName("release") {
-                storeFile = file(properties.getProperty("storeFile"))
-                storePassword = properties.getProperty("storePassword")
-                keyAlias = properties.getProperty("keyAlias")
-                keyPassword = properties.getProperty("keyPassword")
-            }
-        }
-    }
     buildTypes {
         named("debug") {
             isMinifyEnabled = false
@@ -58,9 +39,6 @@ android {
                     "proguard-rules.pro"
                 )
             )
-            if (propFile.exists()) {
-                signingConfig = signingConfigs.getByName("release")
-            }
         }
         named("release") {
             isMinifyEnabled = false
@@ -70,9 +48,6 @@ android {
                     "proguard-rules.pro"
                 )
             )
-            if (propFile.exists()) {
-                signingConfig = signingConfigs.getByName("release")
-            }
         }
     }
     flavorDimensions.apply {
