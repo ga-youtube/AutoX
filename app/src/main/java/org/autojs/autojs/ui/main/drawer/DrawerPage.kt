@@ -785,21 +785,6 @@ private fun AccessibilityServiceSwitch() {
                 ).show()
             }
         }
-    var editor by remember { mutableStateOf(Pref.getEditor()) }
-    SwitchItem(
-        icon = {
-            MyIcon(
-                Icons.Default.Edit,
-                contentDescription = null,
-            )
-        },
-        text = { Text(text = "启用新编辑器") },
-        checked = editor,
-        onCheckedChange = { isChecked ->
-            editor = isChecked
-            Pref.setEditor(isChecked)
-        }
-    )
     SwitchItem(
         icon = {
             MyIcon(
