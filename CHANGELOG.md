@@ -6,6 +6,15 @@
 - refactor: 代码重构
 - breaking change: 破坏性变更
 
+## v6.6.8
+
+### 新功能
+
+- 支持用 autoxscript://sdcard/脚本/file.js 方式调用脚本
+
+### 错误修复
+
+- record root scripts error from bad shell output parsing
 
 ## v6.6.7
 
