@@ -1,5 +1,7 @@
 # AutoX
 
+[📄 更新日志](CHANGELOG.md)
+
 ## 开发指南
 
 **Android Studio 版本:**
