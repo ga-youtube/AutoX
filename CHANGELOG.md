@@ -6,6 +6,12 @@
 - refactor: 代码重构
 - breaking change: 破坏性变更
 
+## v6.6.6
+
+### 错误修复
+
+- APP处于后台时Toast不显示的问题
+
 ## v6.6.5
 
 ### 错误修复
