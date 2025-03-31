@@ -6,6 +6,16 @@
 - refactor: 代码重构
 - breaking change: 破坏性变更
 
+## v6.6.3
+
+### 错误修复
+
+- fix register receiver error when launching on android 14
+- 广播接收问题
+- 跳转通知权限页面报错
+- 设置修改脚本路径不刷新
+- 修复 delete 报错
+
 ## v6.6.2
 
 跳过该版本的同步, 提交历史太混乱了
