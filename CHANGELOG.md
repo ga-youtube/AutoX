@@ -6,6 +6,16 @@
 - refactor: 代码重构
 - breaking change: 破坏性变更
 
+## v6.5.9
+
+### 新功能
+
+- 支持 MQTT
+
+### 错误修复
+
+- 修复 dialogs build 报错
+
 ## v6.5.8 - new repo
 
 - 一些迁移和清理工作, 使其在新仓库正常打包
