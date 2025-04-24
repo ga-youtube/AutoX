@@ -43,24 +43,40 @@ class EditorAppManager : Fragment() {
             return saveStatus!!
         }
 
+        /**
+         * 打开文档
+         */
         fun loadHomeDocument(webView: WebView) {
-            val saveStatus = getSaveStatus(webView.context)
-            val name = saveStatus.getString(DocumentSourceKEY, DocumentSource.DOC_V1_LOCAL.name)
-            switchDocument(
-                webView, try {
-                    DocumentSource.valueOf(name!!)
-                } catch (e: Exception) {
-                    DocumentSource.DOC_V1_LOCAL
+            // 读取保存的 文档源 类型
+            val documentSource = try {
+                val name = getSaveStatus(webView.context)
+                    .getString(DocumentSourceKEY, DocumentSource.DOC_V1.name)
+
+                if (name != null) {
+                    DocumentSource.valueOf(name)
+                } else {
+                    DocumentSource.DOC_V1
                 }
-            )
+            } catch (e: Exception) {
+                DocumentSource.DOC_V1
+            }
+            // 切换到对应的文档源
+            switchDocument(webView, documentSource)
         }
 
+        /**
+         * 切换文档源
+         */
         fun switchDocument(webView: WebView, documentSource: DocumentSource) {
             if (documentSource.isLocal) {
+                // 使用 WebViewAssetLoader 加载本地文件
                 webView.webViewClient = WebViewClient(webView.context, documentSource.uri)
                 webView.loadUrl("https://appassets.androidplatform.net")
-            } else
+            } else {
+                // 加载网络地址
                 webView.loadUrl(documentSource.uri)
+            }
+            // 保存 文档源 类型
             getSaveStatus(webView.context).edit()
                 .putString(DocumentSourceKEY, documentSource.name)
                 .apply()
