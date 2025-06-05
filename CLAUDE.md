@@ -74,6 +74,22 @@ The app provides JavaScript APIs through modules located in `autojs/src/main/ass
 - v6.6.1 has crash on startup bug
 - v6.6.1 has packaging bug where .so files are missing from built APKs (need to change `map` to `forEach` in Zip.kt)
 
+## Version & Tagging Rules
+
+### Git Tag Format
+- **Format**: `v{AUTOX_VERSION}.pf.{BUILD_NUMBER}`
+- **Example**: `v6.6.8.pf.0`, `v6.6.8.pf.1`, `v6.6.8.pf.2`
+
+### Tagging Rules
+- **pf**: PhoneFarm fork identifier
+- **BUILD_NUMBER**: Incremental build number, continues across AutoX versions
+- **No pre-release**: No alpha/beta suffixes needed
+- When creating new tags, increment build number from the latest existing tag
+
+### Current Status
+- Base AutoX version: v6.6.8
+- Latest tag format: v6.6.8.pf.{N} (where N is the next available build number)
+
 ## Development Notes
 
 - Android Studio version: 2023.3.1 Patch 2
