@@ -1,4 +1,4 @@
-name: build apk
+name: build phonefarm apk
 on:
   workflow_dispatch: # 手动选择分支
 
@@ -46,31 +46,31 @@ jobs:
       - name: 打包模版 APP
         run: |
           chmod 777 ./gradlew
-          ./gradlew app:buildTemplateApp
+          ./gradlew phonefarm:buildTemplateApp
 
-      - name: 打包 Auto.js App
+      - name: 打包 PhoneFarm App
         run: |
-          ./gradlew app:assembleV6
+          ./gradlew phonefarm:assembleV6
 
       - name: 对 APP 进行签名
         uses: Tlaster/android-sign@v1.2.2
         with:
           releaseDirectory: |
-            app/build/outputs/apk/v6/release
+            phonefarm/build/outputs/apk/v6/release
           signingKeyBase64: ${{ secrets.ASIGNING_KEY }}
           alias: ${{ secrets.AALIAS }}
           keyStorePassword: ${{ secrets.AKEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.AKEY_PASSWORD }}
-          output: build/app/signed
+          output: build/phonefarm/signed
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
 
       - name: 重命名 apk
         run: |
-          cd build/app/signed
-          mv app-v6-arm64-v8a-*.apk Autox-v6-arm64-v8a-release-${{steps.vars.outputs.short_ref}}.apk
-          mv app-v6-armeabi-v7a-*.apk Autox-v6-armeabi-v7a-release-${{steps.vars.outputs.short_ref}}.apk
-          mv app-v6-universal-*.apk Autox-v6-universal-release-${{steps.vars.outputs.short_ref}}.apk
+          cd build/phonefarm/signed
+          mv phonefarm-v6-arm64-v8a-*.apk PhoneFarm-v6-arm64-v8a-release-${{steps.vars.outputs.short_ref}}.apk
+          mv phonefarm-v6-armeabi-v7a-*.apk PhoneFarm-v6-armeabi-v7a-release-${{steps.vars.outputs.short_ref}}.apk
+          mv phonefarm-v6-universal-*.apk PhoneFarm-v6-universal-release-${{steps.vars.outputs.short_ref}}.apk
           ls
 
       - name: Release
@@ -80,5 +80,5 @@ jobs:
           body: |
             [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/${{steps.vars.outputs.short_ref}}/CHANGELOG.md)
           # 匹配目录下所有文件
-          files: 'build/app/signed/**'
+          files: 'build/phonefarm/signed/**'
           draft: true  # 草稿

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Phone 1 (left) -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M30,40 L42,40 A2,2 0 0 1 44,42 L44,70 A2,2 0 0 1 42,72 L30,72 A2,2 0 0 1 28,70 L28,42 A2,2 0 0 1 30,40 Z"/>
+    <!-- Phone 1 screen -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M30,44 L42,44 L42,66 L30,66 Z"/>
+    <!-- Phone 1 signal bars -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M32,47 L33,47 L33,50 L32,50 Z"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M34,46 L35,46 L35,50 L34,50 Z"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M36,45 L37,45 L37,50 L36,50 Z"/>
+    
+    <!-- Phone 2 (center) -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M48,35 L60,35 A2,2 0 0 1 62,37 L62,75 A2,2 0 0 1 60,77 L48,77 A2,2 0 0 1 46,75 L46,37 A2,2 0 0 1 48,35 Z"/>
+    <!-- Phone 2 screen -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M48,39 L60,39 L60,71 L48,71 Z"/>
+    <!-- Phone 2 signal bars -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M50,42 L51,42 L51,45 L50,45 Z"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M52,41 L53,41 L53,45 L52,45 Z"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M54,40 L55,40 L55,45 L54,45 Z"/>
+    
+    <!-- Phone 3 (right) -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M66,40 L78,40 A2,2 0 0 1 80,42 L80,70 A2,2 0 0 1 78,72 L66,72 A2,2 0 0 1 64,70 L64,42 A2,2 0 0 1 66,40 Z"/>
+    <!-- Phone 3 screen -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M66,44 L78,44 L78,66 L66,66 Z"/>
+    <!-- Phone 3 signal bars -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M68,47 L69,47 L69,50 L68,50 Z"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M70,46 L71,46 L71,50 L70,50 Z"/>
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M72,45 L73,45 L73,50 L72,50 Z"/>
+    
+    <!-- Connection lines (representing farm network) -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M44,56 L46,56 L46,54 L44,54 Z"/>
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M62,56 L64,56 L64,54 L62,54 Z"/>
+    
+    <!-- Farm-like base/ground -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M20,78 L88,78 L88,82 L20,82 Z"/>
+    
+</vector>
